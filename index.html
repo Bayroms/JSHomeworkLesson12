@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        .container {
+            display: grid;
+            grid-template-columns: repeat(3, 32%);
+            gap: 30px;
+            max-width: 90%;
+            margin-left: 5%;
+            margin-right: 5%;
+        }
+        
+        .product {
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #EAEAEA;
+            flex-direction: column;
+        }
+        
+        .product__content {
+            padding-left: 16px;
+            width: 96%;
+            background-color: #f8f8f8;
+        }
+        
+        h3 {
+            font-size: 24px;
+        }
+        
+        .productId {
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 16px;
+        }
+        
+        body {
+            font-family: 'Lato', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .productPrice {
+            color: red;
+            margin-left: 5px;
+        }
+        
+        .productDis {
+            font-weight: 300;
+            font-size: 14px;
+            line-height: 17px;
+            color: #5D5D5D;
+            width: 95%;
+        }
+        
+        .contentHeader {
+            text-align: center;
+        }
+        
+        .headerHead {
+            font-weight: 400;
+            font-size: 30px;
+            line-height: 36px;
+            color: #222222;
+            height: 36px;
+            margin: 0px;
+        }
+        
+        .headerText {
+            font-size: 14px;
+            line-height: 17px;
+            color: #9F9F9F;
+            margin-bottom: 48px;
+            margin-top: 6px;
+        }
+        
+        .buttonBox {
+            display: flex;
+            justify-content: center;
+            margin-top: 48px;
+            margin-bottom: 95px;
+        }
+        
+        .allButton {
+            border: 1px solid #FF6A6A;
+            width: 212px;
+            height: 48px;
+            font-size: 16px;
+            line-height: 19px;
+            color: #F26376;
+            background-color: white;
+        }
+        
+        .imageBox {
+            background: #3A3838DB;
+            overflow: hidden;
+            height: auto;
+        }
+        
+        .productImg {
+            display: block;
+        }
+        
+        .cartBtn {
+            width: 138px;
+            height: 43px;
+            position: absolute;
+            margin-top: -267px;
+            margin-left: 97px;
+            display: none;
+            padding: 0px 0px;
+            border: none;
+        }
+        
+        .cartImg {
+            background: #3A3838DB;
+        }
+        
+        .cart {
+            text-align: center;
+            display: none;
+            margin-bottom: 64px;
+        }
+        
+        .cartHeader {
+            font-weight: 400;
+            font-size: 30px;
+            line-height: 36px;
+            color: #222222;
+            height: 36px;
+            margin: 0px;
+        }
+        
+        .cartContainer {
+            display: grid;
+            margin-left: 5%;
+        }
+        
+        .cartProductEl {
+            width: 652px;
+            display: flex;
+            margin-bottom: 40px;
+            box-shadow: 17px 19px 24px 0px #00000021;
+            border: 1px solid #EAEAEA
+        }
+        
+        .cartProduct__content {
+            margin-left: 30px;
+            width: 262px;
+        }
+        
+        .cartProductId {
+            margin-bottom: 40px;
+        }
+        
+        .closeImg {
+            width: 18px;
+            height: 18px;
+            margin-top: 28px;
+            padding-right: 15px;
+        }
+        
+        .cartPriceValue {
+            color: red;
+            margin-left: 5px;
+        }
+        
+        .cartProductPrice {
+            display: flex;
+            height: 29px;
+        }
+        
+        .cartProductQuantity {
+            display: flex;
+            height: 10px;
+        }
+        
+        .quanText {
+            margin-top: 0px;
+        }
+        
+        .quanValue {
+            margin-top: -8px;
+            width: 44px;
+            height: 24.95px;
+            margin-left: 24px;
+            border: 1px solid #EAEAEA;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="contentHeader">
+        <h3 class="headerHead">Fetured Items</h3>
+        <p class="headerText">Shop for items based on what we featured in this week</p>
+    </div>
+    <div class="container">
+    </div>
+    <div class="buttonBox">
+        <button type="#" class="allButton">Browse All Product</button>
+    </div>
+    <div class="cart">
+        <h3 class="cartHeader">Cart Items</h3>
+    </div>
+    <div class="cartContainer">
+
+    </div>
+
+
+    <script src="data.js"></script>
+    <script>
+        const data = JSON.parse(dataInfo);
+        let count = 0;
+        data.forEach(element => {
+            const container = document.querySelector('.container')
+
+            const productEl = document.createElement('div')
+            productEl.classList.add('product')
+
+            const imageBox = document.createElement('div')
+            imageBox.classList.add('imageBox')
+            const productImg = document.createElement('img')
+            productImg.setAttribute('alt', 'product__image')
+            productImg.classList.add('productImg')
+            productImg.src = element.image;
+
+            const product__content = document.createElement('div')
+            product__content.classList.add('product__content')
+            const productId = document.createElement('h3')
+            productId.classList.add('productId')
+            productId.textContent = element.id;
+            const productDis = document.createElement('p')
+            productDis.classList.add('productDis')
+            productDis.textContent = element.discription;
+            const productPrice = document.createElement('p')
+            productPrice.classList.add('productPrice')
+            productPrice.textContent = element.price;
+            const cartBtn = document.createElement('button')
+            cartBtn.classList.add('cartBtn')
+            const cartImg = document.createElement('img')
+            cartImg.setAttribute('alt', 'cart__image')
+            cartImg.classList.add('cartImg')
+            const productColor = document.createElement('p')
+            productColor.textContent = element.color
+            const productSize = document.createElement('p')
+            productSize.textContent = element.size
+            let productCount = document.createElement('p')
+            productCount.textContent = Number(element.count)
+
+            product__content.appendChild(productId);
+            product__content.appendChild(productDis);
+            product__content.appendChild(productPrice);
+            imageBox.appendChild(productImg)
+            imageBox.appendChild(cartBtn)
+
+            container.appendChild(productEl);
+            productEl.appendChild(imageBox);
+            productEl.appendChild(product__content);
+
+            imageBox.addEventListener('mouseenter', (e) => {
+                productImg.style.opacity = '0.7'
+                cartImg.src = 'image/add_to_cart.png';
+                cartBtn.appendChild(cartImg)
+                cartBtn.style.display = 'block'
+            })
+            imageBox.addEventListener('mouseleave', (e) => {
+                productImg.style.opacity = '1'
+                cartImg.remove();
+                cartBtn.style.display = 'none'
+            })
+            cartBtn.addEventListener('click', (e) => {
+                const cart = document.querySelector('.cart')
+                cart.style.display = 'block'
+                const cartContainer = document.querySelector('.cartContainer')
+                const cartProductEl = document.createElement('div')
+                cartProductEl.classList.add('cartProductEl')
+                const cartProductImg = document.createElement('img')
+                cartProductImg.setAttribute('alt', 'product__image')
+                cartProductImg.src = productImg.src;
+                const cartProduct__content = document.createElement('div')
+                cartProduct__content.classList.add('cartProduct__content')
+                const cartProductId = document.createElement('h3')
+                cartProductId.classList.add('cartProductId')
+                cartProductId.textContent = productId.textContent;
+                const cartProductPrice = document.createElement('p')
+                cartProductPrice.classList.add('cartProductPrice')
+                const cartPriceText = document.createElement('p')
+                cartPriceText.classList.add('cartPriceText')
+                cartPriceText.textContent = 'Price: '
+                const cartPriceValue = document.createElement('p')
+                cartPriceValue.classList.add('cartPriceValue')
+                cartPriceValue.textContent = productPrice.textContent;
+                const cartProductColor = document.createElement('p')
+                cartProductColor.classList.add('cartProductColor')
+                cartProductColor.textContent = productColor.textContent
+                const cartProductSize = document.createElement('p')
+                cartProductSize.classList.add('cartProductSize')
+                cartProductSize.textContent = element.size
+                const cartProductQuantity = document.createElement('p')
+                cartProductQuantity.classList.add('cartProductQuantity')
+                const quanText = document.createElement('p')
+                quanText.classList.add('quanText')
+                quanText.textContent = 'Quantity: '
+                const quanValue = document.createElement('p')
+                quanValue.classList.add('quanValue')
+                quanValue.textContent = productCount.textContent
+                count++;
+
+                const closeImg = document.createElement('img')
+                closeImg.classList.add('closeImg')
+                closeImg.src = "image/cross.png"
+
+                cartProductPrice.appendChild(cartPriceText)
+                cartProductPrice.appendChild(cartPriceValue)
+                cartProductQuantity.appendChild(quanText)
+                cartProductQuantity.appendChild(quanValue)
+                cartProduct__content.appendChild(cartProductId)
+                cartProduct__content.appendChild(cartProductPrice)
+                cartProduct__content.appendChild(cartProductColor)
+                cartProduct__content.appendChild(cartProductSize)
+                cartProduct__content.appendChild(cartProductQuantity)
+
+                cartProductEl.appendChild(cartProductImg)
+                cartProductEl.appendChild(cartProduct__content)
+                cartContainer.appendChild(cartProductEl)
+                cartProductEl.appendChild(closeImg);
+                closeImg.addEventListener('click', (e) => {
+                    e.target.parentNode.remove();
+                    count--;
+                    if (count == 0) {
+                        cart.style.display = 'none'
+                        productCount.textContent = '1'
+                    }
+                })
+            })
+        });
+    </script>
+</body>
+
+</html>
